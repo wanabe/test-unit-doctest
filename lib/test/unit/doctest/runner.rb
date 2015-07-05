@@ -1,13 +1,13 @@
-require "minitest"
+require "test/unit"
 
-module Minitest
+module Test::Unit
   module Doctest
     class Runner
       attr_reader :test_class, :test_strings
 
       def initialize(file)
         @file = file
-        @test_class = Class.new(Minitest::Test)
+        @test_class = Class.new(Test::Unit::TestCase)
         @test_class.define_singleton_method(:to_s) { file }
         @test_strings = Parser.new(File.read(file)).parse
       end

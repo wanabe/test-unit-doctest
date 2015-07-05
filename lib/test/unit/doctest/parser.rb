@@ -1,4 +1,4 @@
-module Minitest
+module Test::Unit
   module Doctest
     class Parser
       attr_reader :source
