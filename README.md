@@ -60,7 +60,7 @@ To test a bunch of files you can create a Rake task and use FileList:
 ```ruby
 # Rakefile
 require "test/unit/doctest"
-require "test/unit/autorun"
+require "test/unit"
 
 task :doctest do
   f = FileList["*.rb"]
@@ -78,7 +78,7 @@ With Rails you can just create a Rake task which loads up the environment like t
 task doctest: :environment do
   Rails.env = "test"
   require "test/unit/doctest"
-  require "test/unit/autorun"
+  require "test/unit"
 
   f = FileList["#{Rails.root}/**/*.rb"]
   Test::Unit::Doctest.run(f, false)
