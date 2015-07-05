@@ -48,7 +48,7 @@ Add to Gemfile:
 
 ```ruby
 # Gemfile
-gem "test-unit-doctest"
+gem "test-unit-doctest", github: "wanabe/test-unit-doctest"
 ```
 
 To test a single file you can use the executable `unitdoctest`:
