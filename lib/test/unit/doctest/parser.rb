@@ -34,7 +34,7 @@ module Test::Unit
       def test_string(lines, name)
         %{
           def test_#{name}
-            #{lines.join($/)}
+            #{lines.join($/ + File.readlines(__FILE__)[__LINE__ - 1][/^\s*/])}
           end
         }
       end
