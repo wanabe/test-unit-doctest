@@ -1,6 +1,7 @@
-## minitest-doctest
+## test-unit-doctest
 
-Generate tests from code comments and run them with Minitest. It's like Python's doctest for Ruby.
+Generate tests from code comments and run them with Test::Unit. It's like Python's doctest for Ruby.
+And it's a fork of minitest-doctest (https://github.com/lauri/minitest-doctest).
 
 ### Example
 
@@ -28,7 +29,7 @@ end
 ```
 
 ```
-$ minidoctest calculator.rb
+$ unitdoctest calculator.rb
 
 Run options: --seed 59837
 
@@ -47,27 +48,28 @@ Add to Gemfile:
 
 ```ruby
 # Gemfile
-gem "minitest-doctest", github: "lauri/minitest-doctest"
+gem "test-unit-doctest"
 ```
 
-To test a single file you can use the executable `minidoctest`:
+To test a single file you can use the executable `unitdoctest`:
 
-`$ bundle exec minidoctest calculator.rb`
+`$ bundle exec unitdoctest calculator.rb`
 
 To test a bunch of files you can create a Rake task and use FileList:
 
 ```ruby
 # Rakefile
-require "minitest/doctest"
-require "minitest/autorun"
+require "test/unit/doctest"
+require "test/unit/autorun"
 
 task :doctest do
   f = FileList["*.rb"]
-  Minitest::Doctest.run(f)
+  Test::Unit::Doctest.run(f)
 end
 ```
 
-This works fine when the files you're testing are self-contained. If they are not you'll get an error when minitest-doctest tries to `require` the file. In this case you'll have to work out requiring all the necessary files yourself and pass `false` as the second argument to `Minitest::Doctest.run`.
+This works fine when the files you're testing are self-contained. If they are not you'll get an error when test-unit-doctest tries to `require` the file.
+In this case you'll have to work out requiring all the necessary files yourself and pass `false` as the second argument to `Test::Unit::Doctest.run`.
 
 With Rails you can just create a Rake task which loads up the environment like this:
 
@@ -75,11 +77,11 @@ With Rails you can just create a Rake task which loads up the environment like t
 # lib/tasks/doctest.rake
 task doctest: :environment do
   Rails.env = "test"
-  require "minitest/doctest"
-  require "minitest/autorun"
+  require "test/unit/doctest"
+  require "test/unit/autorun"
 
   f = FileList["#{Rails.root}/**/*.rb"]
-  Minitest::Doctest.run(f, false)
+  Test::Unit::Doctest.run(f, false)
 end
 ```
 
